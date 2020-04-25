@@ -1,0 +1,140 @@
+\documentclass[18pt]{article}
+\usepackage[portuguese]{babel}
+\input{estrutura}
+\title{Agulha de Buffon - Atividade 1}
+\author{Marcos Pereira - 11703832}
+
+\usepackage{makecell}
+
+\renewcommand\theadalign{bc}
+\renewcommand\theadfont{\bfseries}
+\renewcommand\theadgape{\Gape[4pt]}
+\renewcommand\cellgape{\Gape[4pt]}
+
+
+
+\begin{document}
+	\begin{wrapfigure}{r}{0.1\textwidth}
+		\centering
+		\includegraphics[width=0.19\textwidth]{usp}
+		\textsl{}	\end{wrapfigure}
+	{\large Agulha de Buffon}
+	\\
+	
+	
+	\begin{flushleft}
+		Universidade de São Paulo - USP
+		\\
+		
+		Marcos Pereira \hspace{2cm} Nº USP: 11703832\\
+		
+		Departamento de Matemática Aplicada - MAP
+		\vspace{.0cm}
+		{\large \textbf{}}
+	\end{flushleft}
+\vspace{1cm}
+
+\begin{center}
+	{\Large \textbf{Agulha de Buffon}} 
+\end{center}
+
+\vspace{1cm}
+
+\section{Introdução}
+
+Um dos métodos existentes na Matemática para estimar o valor de $\pi$ é o método da \textbf{agulha de Buffon}, ele foi proposto no século XVII pelo francês Georges-Louis Leclerc, também conhecido como Georges de Buffon ou conde de Buffon.
+
+O método consiste em ....\\
+
+\paragraph{conde de Buffon}
+
+Georges-Louis Leclerc nasceu em Montbard, na França em 7 de setembro de 1707, foi matemático, filosofo e escritor cujas teorias influenciaram duas gerações naturalistas, nas quais faziam partes nomes influentes como Charles Darwin.\\
+
+Georges-Louis Leclerc faleceu em 16 de abril de 1788 aos 80 anos.
+
+\paragraph{Método}
+
+O problema da agulha de Buffon pode ser formulado como se segue: Suponha que tenhamos um piso composto de tiras paralelas de madeira com mesma largura, então jogamos uma agulho no chão. Qual é a probabilidade de que a agulha caia entre duas tiras de madeira?
+
+Esse problema pode ser considerado o primeiro problema na geometria probabilística, a solução para o problema (a probabilidade desejada) para o caso de uma agulha cujo tamanho seja menor do que a largura das tábuas $\ell<L$ é dada por
+\begin{align}
+P=\frac{2\ell}{\pi L}\,.
+\end{align}
+
+Seja $x$ a distância do centro da agulha até à linha paralela mais próxima e seja $\theta$ o ângulo formado entre a agulha e um das linhas paralelas, definimos então a densidade de probabilidade de x estar em $0\leq x\leq \frac{L}{2}$ como
+\begin{align}
+\rho(x)=\begin{cases}
+\dfrac{2}{L}~&:~~ x\in\left[0, \frac{L}{2}\right]\\
+\vspace{.1cm}
+0~&:~x\notin \left[0, \frac{L}{2}\right]\,,
+\end{cases}
+\end{align}
+note que aqui $x=0$ é a agulha centrada em uma tira e $x=\frac{L}{2}$ equivale à agulha com o centro entre duas tiras. A distribuição de probabilidade é uniforme, portanto a agulha possui igual 
+
+probabilidade de cair em qualquer ponto nesse intervalo, porém não pode cair fora desse intervalo
+%\begin{figure}[h!]
+%	\centering
+%	\includegraphics[scale=.5]{needledensity}
+%\end{figure}
+
+A densidade de probabilidade uniforme do ângulo é dada por
+\begin{align}
+\varrho\left(\theta\right)=\begin{cases}
+\dfrac{2}{\pi}~&:\theta\in\left(0,\frac{\pi}{2}\right]\\
+0~&:\theta\notin \left(0,\frac{\pi}{2}\right]\,,
+\end{cases}
+\end{align}
+de forma semelhante, $\theta=0$ equivale a agulha caindo paralelamente às tiras e $\theta=\frac{\pi}{2}$ equivale à agulha caindo perpendicularmente. As duas variáveis aleatórias $x$ e $\theta$ são independentes, portanto, a função de probabilidade conjunta equivale ao produto de $\rho$ com $\varrho$:
+\begin{align*}
+P\left(x,\theta\right)=\rho\left(x\right)\varrho\left(\theta\right)\,,
+\end{align*}
+ou seja,
+\begin{align}
+\varrho\left(\theta\right)=\begin{cases}
+\dfrac{4}{L\pi}~&:\left(x,\theta\right)\in D\\
+0~&:\left(x,\theta\right)\notin D\,,
+\end{cases}
+\end{align}
+aqui a região $D$ é representada por $$D=\left\{\left(x,\theta\right)\in\mathbb{R}^2;~0\leq x\leq \frac{L}{2}, 0< \theta\leq \frac{\pi}{2}\right\}\,.$$
+a agulha tocará uma tira caso:
+\begin{align*}
+x\leq \frac{\ell}{2}\sen\left(\theta\right)\,.
+\end{align*}
+
+A partir dessa formulação temos dois casos: Uma agulha curta e uma longa. Para o primeiro, integramos $P\left(x,\theta\right)$ sobre toda região\footnote{Lembre-se que $D=\left\{\left(x,\theta\right)\in\mathbb{R}^2;~0\leq x\leq \frac{L}{2}, 0< \theta\leq \frac{\pi}{2}\right\}\,.$} para encontrar a probabilidade da agulha cruzar uma tira:
+\begin{align}\label{eq5}
+\mathcal{P}=\iint\limits_{D}P\left(x,\theta\right)dA=\int\limits_{0}^{\frac{\pi}{2}}\left(\int\limits_{0}^{\frac{\ell}{2}\sen\left(\theta\right)}\frac{4}{\pi L}dx\right)d\theta=\frac{2\ell}{\pi L}\,.
+\end{align}
+
+Agora para o segundo caso, a agulha é maior que a tira, ou seja $\ell > L$, devemos para esse caso supor que exista algum mínimo $m\left(\theta\right)$ entre $\frac{\ell}{2}\sen\left(\theta\right)$ e $\frac{L}{2}$, para esse caso a probabilidade é dada por
+\begin{align}
+\mathcal{P}=\int\limits_{0}^{\frac{\pi}{2}}\left(\int\limits_{0}^{m\left(\theta\right)}\frac{4}{\pi L}dx\right)d\theta=\frac{2\ell}{\pi L}-\frac{2}{\pi L}\left[\sqrt{\ell^2-L^2}+L \arcsen\left(\frac{L}{\ell}\right)\right]+1
+\end{align}
+ou equivalentemente
+\begin{align}
+\mathcal{P}=\frac{2}{\pi}\arccos\left(\frac{L}{\ell}\right)+\frac{2\ell}{\pi L}\left[1-\sqrt{1-\left(\frac{L}{\ell}\right)^2}\right]\,,
+\end{align}
+
+
+
+na segunda expressão, o primeiro termo representa a probabilidade do ângulo da agulha de forma que ela atravessará sempre ao menos uma tira. O termo da direita representa a probabilidade da agulha cair formando um ângulo que dependa da posição e que atravesse a tira.
+
+Também perceba que sempre quando $\theta$ possuir um valor tal que $\sen\left(\theta\right)\leq L$, a probabilidade de atravessar a tira é a mesma que o caso da agulha curta, no entanto se $L\sen\left(\theta\right)> L$ a probabilidade será constante e igual a 1.
+
+\paragraph{Resultados}
+
+Para estimar $\pi$ devemos reorganizar a eq. \ref{eq5} como
+\begin{align*}
+\pi=\frac{2\ell}{L\mathcal{P}}\,,
+\end{align*}
+ou seja, se conduzirmos um experimento para estimar $\mathcal{P}$ conseguiremos uma estimativa para $\pi$. Suponha que em um experimento jogamos $n$ agulhas e verificamos que $m$ dessas agulhas estão cruzando as tiras, então uma aproximação de $\mathcal{P}$ é dada por $$\mathcal{P}=\frac{m}{n}$$ e obtemos daí a fórmula \begin{align}
+\pi\approx\frac{2\ell n}{mL}\,.
+\end{align}
+
+
+Em 1901, Mario Lazzarini, um matemático italiano realizou o experimento de Buffon, jogando uma agulha 3408 vezes, ele obteve uma aproximação razoável para $pi$ cuja precisão resultou em 6 casas decimais de $\pi$.
+\bigbreak
+	
+	
+	
+\end{document}

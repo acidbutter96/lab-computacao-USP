@@ -1,0 +1,120 @@
+\documentclass{article}
+\usepackage[portuguese]{babel}
+%\usepackage[latin1]{inputenc}
+\usepackage{amsthm,mathbbol,amsmath,mathrsfs,mathpazo,esint}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{graphicx,color}
+\usepackage[top=1cm, bottom=1.5cm, left=2cm, right=1cm]{geometry}
+\usepackage{sidecap}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+\usepackage{braket}
+\usepackage[small,it]{caption}
+
+%operadores matemáticos
+\DeclareMathOperator{\e}{\mathrm{e}}
+\DeclareMathOperator{\sen}{\mathrm{sen}}
+
+
+\begin{document}
+	
+\begin{figure}[h!]
+%    \includegraphics[width=0.19\textwidth]{logo}
+\end{figure}
+
+
+\begin{center}
+	{\large \textbf{Laboratório de Computação e Simulação : MAP-2212}}
+	
+	{\Large\textbf{EP 2: ?}}
+	
+	{\large\textbf{Marcos Pereira -  11703832}}
+
+\end{center}
+
+\section*{Atividade}
+
+Implementar as 4 variantes do Método de Monte Carlo descritas na Sec. G.2 para integrar, em $I=\left[0, 1\right]$, a função:
+$$f(x)=\e^{-ax}\cos(bx)$$ onde $a= 0.RG$   e $b=0.NUSP$  (RG e Numero USP do aluno).
+A resposta deve ser dada com erro relativo $(  | g^* - g | / g  )  <  1\%$ onde $g^*$ é a estimativa numérica do valor da integral, e g é o valor real da integral (desconhecido). 
+
+
+\section{Integração e Redução de Variância}
+
+\subsection{Método de Monte Carlo "cru"}
+Considere o problema de calcular a integral
+\begin{align}
+    I_S=\int\limits_{S}f(x)dx
+\end{align}
+onde $f(x)$ é uma função suave por partes $\mathcal{C}^1$ em $S=\left[a,b\right]$, um intervalo real compacto. Utilizamos o método 'crude MC' e aproximamos o valor da integral como
+\begin{align*}
+        \int\limits_{a}^{b}f(x)dx\approx \sum_{n=1}^{N}f\left(x_n\right)\Delta x_n
+\end{align*}
+com $\Delta x_n=\frac{b-a}{N}$ obtemos:
+\begin{align}
+    \int\limits_{a}^{b}f(x)dx\approx \frac{b-a}{N}\sum_{n=1}^{N}f\left(x_n\right)\implies \frac{1}{b-a}\int\limits_{a}^{b}f\left(x\right)dx\approx \frac{1}{N}\sum_{n=1}^{N}f\left(x_n\right)
+\end{align}
+sabendo que o valor médio de uma função em um intervalo $[a,b]$ é dado por
+\begin{align*}
+    \braket{f}=\frac{1}{b-a}\int\limits_{a}^{b}f\left(x\right)dx=\frac{I_S}{\Delta x}
+\end{align*}
+verificamos que uma aproximação para o valor médio de uma função num intervalo definido é
+\begin{align}\label{eq3}
+    \braket{f}\approx \frac{1}{N}\sum_{n=1}^{N}f\left(x_n\right)\,.
+\end{align}
+
+Agora suponha uma amostra aleatória uniforme de $N$ elementos $x_i$, onde $i\in R=\left\{i\right\}_{i=1}^{N}$ e $x_i\in [a,b]~~\forall i\in R$, o valor médio de $f$ em $R$ é representado por $\bar{f}$ e é calculado como
+\begin{align}
+    \bar{f}=\frac{1}{N}\sum_{n=1}f\left(x_n\right)\,,
+\end{align}
+ou seja, podemos substituir o lado esquerdo da \ref{eq3} e obter
+\begin{align*}
+    \braket{f}\approx \bar{f}\,,
+\end{align*}
+ou seja,
+\begin{align}\label{eq5}
+    \frac{I_S}{\Delta x}\approx \frac{1}{N}\sum_{x_n\in R}f\left(x_n\right)\,.
+\end{align}
+Uma aproximação de $I_S$ pode ser obtida a partir da média da função em uma amostra aleatória uniforme, basta isolar $I_S$ em \ref{eq5}:
+\begin{align}
+    I_S\approx \frac{\Delta x}{N}\sum_{x_n\in R}f\left(x_n\right)\,.
+\end{align}
+O Método apresentado acima é o Método de Monte Carlo "Cru" ("crude"-MC) %ref
+
+
+
+
+
+\section{Integração e Redução de Variância}
+
+Trabalharemos neste problema com uma generalização do método de Monte Carlo para integração numérica.
+
+Considere a integração de uma função limitada $0\leq f\left(x\right)\leq 1$ definida no intervalo fechado $I=\left[0,1\right]$. A estimativa imparcial primitiva de Monte Carlo dessa integral é o valor médio da função calculada em uma distribuição uniforme de $n$ pontos aleatórios $x_i\in I; i\in\left\{1,n\right\}$, cuja variância é dada por
+\begin{align}
+    \sigma_c^2=\frac{1}{n}\int\limits_{I}dx\left(f(x)-\gamma\right)^2
+\end{align}
+onde $$\braket{f}=\int\limits_{I}f(x)dx$$ e $$\braket{f}_c=\frac{1}{n}\sum_{i=1}^{n}f\left(x_i\right)\,.$$
+
+Uma alternativa ao estimador parcial é o método de Monte Carlo certo-ou-errado, definido pela função $h$:
+\begin{align}
+    h\left(x_1,x_2\right)=I\left(f(x_1)\geq x_2\right)&&\gamma=\iint\limits_{I\times I}h\left(x_1,x_2\right)dx_1dx_2&&\hat{\gamma}_h=\frac{1}{n}\sum_{i=1}^{n}h\left(x_{1;i},x_{2;i}\right)=\frac{n^*}{n}
+\end{align}
+e 
+\begin{align*}
+    \sigma_h^2=\frac{\gamma\left(1-\gamma\right)}{n}&&\sigma_h^2-\sigma_c^2=\frac{1}{n}\int\limits_{I}f\left(x\right)\left(1-f\left(x\right)\right)dx>0\,.
+\end{align*}
+
+Outro método possível é a MMC amostragem de importância, que é definido por uma integração no intervalo $I$ mas agora com uma distribuição amostral auxiliar, $g$ definida no intervalo,
+\begin{align*}
+    \gamma=\int\limits_{I}f\left(x\right)dx=\int\limits_{I}\frac{f(x)}{g(x)}g(x)dx=\int\limits_{I}\frac{f(x)}{g(x)}\partial_xG(x)dx=\int\limits_{\tilde{I}}\frac{f(x)}{g(x)}dG\\
+\end{align*}
+\begin{align*}
+    \hat{\gamma}_s=\frac{1}{n}\sum_{i=1}^{n}\frac{f\left(x_i\right)}{g\left(x_i\right)},&x_ig\,,&&\left\{i\right\}_{i=1}^{n}\,;&&\sigma_s^2=\frac{1}{n}\int\limits_{\tilde{I}}dG\left(\frac{f(x)}{g(x)}-\gamma\right)^2dG\,.
+\end{align*}
+
+Seja $\psi(x)$ uma função semelhante a $f(x)$, porém $\psi$ é mais fácil de integrar e possui solução analítica ou numérica, denominamos $\psi(x)$ como variável de controle de $f(x)$ e calculamos
+\begin{align*}
+    \gamma=\int\limits_{I}\psi(x)dx+\int\limits_{I}\left(f(x)-\psi(x)\right)dx=\gamma'+\int\limits_{I}dx\left(f(x)-\psi(x)\right)
+\end{align*}
+\end{document}
